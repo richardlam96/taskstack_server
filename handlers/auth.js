@@ -13,7 +13,7 @@ exports.register = async function(req, res, next) {
     }
 
     // Create a new User.
-    let newUser = db.User.create(req.body);
+    let newUser = await db.User.create(req.body);
     let { id, username, password } = newUser;
 
     // Assign a token to the new User.
@@ -39,7 +39,7 @@ exports.register = async function(req, res, next) {
 exports.signin = async function(req, res, next) {
   try {
     // Attempt to find User in database.
-    let user = await db.User.findOne({ _id: req.params.userId });
+    let user = await db.User.findOne({ username: req.body.username });
     if (!user) {
       next({
         error: 401,
@@ -61,7 +61,7 @@ exports.signin = async function(req, res, next) {
     const token = jwt.sign({
       id,
       username,
-    });
+    }, process.env.SECRET_KEY);
 
     return res.status(200).json({
       id,

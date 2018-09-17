@@ -8,7 +8,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 
 // Middleware imports.
-const { errorHandler } = require('./handlers/errorHandler');
+const { errorHandler } = require('./handlers/error');
 
 
 // Configuration.
@@ -27,6 +27,6 @@ app.use(function(req, res, next) {
 app.use(errorHandler);
 
 
-app.listen(process.env.IP, process.env.PORT, () => {
-  console.log(`<${arguments[0]}:${arguments[1]}> TaskStack server`);
+app.listen(process.env.PORT, process.env.IP, () => {
+  console.log(`<${process.env.IP}:${process.env.PORT}> TaskStack server`);
 });

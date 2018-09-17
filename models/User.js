@@ -17,14 +17,14 @@ var userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
   }],
-};
+});
 
 userSchema.pre('save', async function(next) {
   try {
     if (!this.isModified('password')) {
       return next();
     }
-    let isMatch = await bcrypt.hash(this.password, 10);
+    let hashedPassword = await bcrypt.hash(this.password, 10);
     this.password = hashedPassword;
     return next();
   } catch(error) {
@@ -39,7 +39,7 @@ userSchema.methods.comparePassword = async function(candidatePassword, next) {
   } catch(error) {
     return next(error);
   }
-});
+};
 
 
 module.exports = mongoose.model('User', userSchema);

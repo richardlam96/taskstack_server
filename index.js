@@ -6,9 +6,11 @@ const cors = require('cors');
 
 // Route imports.
 const authRoutes = require('./routes/auth');
+const projectRoutes = require('./routes/project');
 
 // Utility and Middleware imports.
 const { errorHandler } = require('./handlers/error');
+const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
 
 
 // Configuration.
@@ -16,6 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/users/:userId/projects', projectRoutes);
 
 // Default error handlers.
 app.use(function(req, res, next) {

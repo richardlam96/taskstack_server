@@ -29,10 +29,7 @@ exports.register = async function(req, res, next) {
     });
   
   } catch(error) {
-    next({
-      status: 400,
-      message: error.message,
-    });
+    next(error)
   }
 }
 
@@ -70,10 +67,7 @@ exports.signin = async function(req, res, next) {
     });
 
   } catch(error) {
-    next({
-      status: 400,
-      message: error.message,
-    });
+    next(error);
   }
 }
 

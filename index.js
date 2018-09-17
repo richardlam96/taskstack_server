@@ -7,7 +7,7 @@ const cors = require('cors');
 // Route imports.
 const authRoutes = require('./routes/auth');
 
-// Middleware imports.
+// Utility and Middleware imports.
 const { errorHandler } = require('./handlers/error');
 
 

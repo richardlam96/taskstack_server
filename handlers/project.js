@@ -9,16 +9,16 @@ exports.indexProjects = async function(req, res, next) {
     });
 
     // Normalize data.
-    let projectIds = [];
     let projectsById = projects.reduce((acc, project) => {
-      projectIds.push(project._id);
       acc[project._id] = project;
       return acc;
     }, {});
 
+    let projectIds = Object.keys(projectsById);
+
     return res.status(200).json({
-      projectIds,
       projectsById,
+      projectIds,
     });
 
   } catch(error) {
@@ -35,9 +35,8 @@ exports.createProject = async function(req, res, next) {
       timeslice: req.body.timeslice,
     });
 
-    let { id, owner, name, timeslice, tasks } = project;
     return res.status(200).json({
-      id, name, timeslice, tasks,
+      ...project.toObject(),
     });
   
   } catch(error) {
@@ -52,9 +51,8 @@ exports.deleteProject = async function(req, res, next) {
       _id: req.params.id,
     });
 
-    let { id, owner, name, timeslice, tasks } = deletedProject;
     return res.status(200).json({
-      id, owner, name, timeslice, tasks,
+      ...deletedProject.toObject(),
     });
 
   } catch(error) {

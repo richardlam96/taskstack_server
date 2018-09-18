@@ -14,17 +14,15 @@ exports.register = async function(req, res, next) {
 
     // Create a new User.
     let newUser = await db.User.create(req.body);
-    let { id, username, password } = newUser;
+    let { password, ...userData } = newUser.toObject();
 
     // Assign a token to the new User.
     let token = jwt.sign({
-      id,
-      username,
+      ...userData,
     }, process.env.SECRET_KEY);
 
     return res.status(200).json({
-      id,
-      username,
+      ...userData,
       token,
     });
   
@@ -54,15 +52,13 @@ exports.signin = async function(req, res, next) {
     }
 
     // Username and password valid, return data and token.
-    const { id, username } = user;
+    const { password, ...userData } = user.toObject();
     const token = jwt.sign({
-      id,
-      username,
+      ...userData,
     }, process.env.SECRET_KEY);
 
     return res.status(200).json({
-      id,
-      username,
+      ...userData,
       token,
     });
 

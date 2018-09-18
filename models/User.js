@@ -13,10 +13,6 @@ var userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  projects: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project',
-  }],
 });
 
 userSchema.pre('save', async function(next) {

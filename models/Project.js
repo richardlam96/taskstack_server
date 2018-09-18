@@ -16,10 +16,6 @@ var projectSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  tasks: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Task',
-  }],
 });
 
 projectSchema.pre('remove', async function(next) {

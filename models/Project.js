@@ -20,7 +20,8 @@ var projectSchema = new mongoose.Schema({
 
 projectSchema.pre('remove', async function(next) {
   try {
-    await db.Task.remove({ _id: {$in: this.tasks} });
+    await db.Task.remove({ project: this._id });
+    next();
   } catch(error) {
     next(error);
   }

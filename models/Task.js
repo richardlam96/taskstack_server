@@ -10,8 +10,9 @@ var taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  startTime: {
-    type: Date,
+  completed: {
+    type: Boolean,
+    default: false,
   },
 });
 

@@ -13,6 +13,14 @@ var userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  hoursToday: {
+    type: Number,
+    required: false,
+  },
+  hoursWeekly: {
+    type: Number,
+    required: false,
+  },
 });
 
 userSchema.pre('save', async function(next) {

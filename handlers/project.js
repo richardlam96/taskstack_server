@@ -48,7 +48,7 @@ exports.deleteProject = async function(req, res, next) {
   try {
     // Attempt to delete the given project.
     let deletedProject = await db.Project.findOneAndDelete({
-      _id: req.params.id,
+      _id: req.params.projectId,
     });
 
     return res.status(200).json({
@@ -61,4 +61,22 @@ exports.deleteProject = async function(req, res, next) {
 }
 
 
-      
+exports.updateProject = async function(req, res, next) {
+  try {
+    // Find task by id, update it, and return the new version.
+    let project = await db.Project.findOneAndUpdate(
+      { _id: req.params.projectId }, 
+      req.body,
+      { new: true }
+    );
+
+    return res.status(200).json({
+      ...project.toObject(),
+    });
+  
+  } catch(error) {
+    next(error);
+  }
+}
+
+     

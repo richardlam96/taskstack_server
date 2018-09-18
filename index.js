@@ -7,6 +7,7 @@ const cors = require('cors');
 // Route imports.
 const authRoutes = require('./routes/auth');
 const projectRoutes = require('./routes/project');
+const taskRoutes = require('./routes/task');
 
 // Utility and Middleware imports.
 const { errorHandler } = require('./handlers/error');
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users/:userId/projects', projectRoutes);
+app.use('/api/users/:userId/projects/:projectId/tasks', taskRoutes);
 
 // Default error handlers.
 app.use(function(req, res, next) {

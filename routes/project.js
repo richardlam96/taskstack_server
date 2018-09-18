@@ -3,6 +3,8 @@ const router = express.Router({ mergeParams: true });
 const {
   indexProjects,
   createProject,
+  deleteProject,
+  updateProject,
 } = require('../handlers/project');
 
 
@@ -11,7 +13,8 @@ router.route('/')
   .post(createProject);
 
 router.route('/:projectId')
-  .get
+  .delete(deleteProject)
+  .put(updateProject);
 
 
 module.exports = router;
